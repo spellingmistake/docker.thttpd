@@ -1,0 +1,11 @@
+diff -Nrup old/mime_types.txt new/mime_types.txt
+--- old/mime_types.txt	2018-01-29 05:16:54.000000000 +0100
++++ new/mime_types.txt	2018-11-02 15:42:40.428152076 +0100
+@@ -81,6 +81,7 @@ mid	audio/midi
+ midi	audio/midi
+ mif	application/vnd.mif
+ mime	message/rfc822
++mkv	video/x-matroska
+ mml	application/mathml+xml
+ mov	video/quicktime
+ movie	video/x-sgi-movie

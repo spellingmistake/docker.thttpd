@@ -1,0 +1,12 @@
+diff -Nrup old/Makefile.in new/Makefile.in
+--- old/Makefile.in	2005-05-20 21:10:24.000000000 +0200
++++ new/Makefile.in	2018-11-02 15:19:48.511791980 +0100
+@@ -39,7 +39,7 @@ WEBDIR = $(prefix)/www
+ # CONFIGURE: The group that the web directory belongs to.  This is so that
+ # the makeweb program can be installed set-group-id to that group, and make
+ # subdirectories.  If you're not going to use makeweb, ignore this.
+-WEBGROUP =	www
++WEBGROUP =	www-data
+ 
+ # CONFIGURE: Directory for CGI executables.
+ CGIBINDIR =	$(WEBDIR)/cgi-bin

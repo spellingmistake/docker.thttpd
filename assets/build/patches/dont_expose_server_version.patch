@@ -1,0 +1,66 @@
+diff -Nrup old/config.h new/config.h
+--- old/config.h	2011-09-11 18:41:37.000000000 +0200
++++ new/config.h	2018-11-02 14:47:03.177754092 +0100
+@@ -174,12 +174,6 @@
+     "canonical.name.two/alternate.name.two"
+ #endif
+ 
+-/* CONFIGURE: Undefine this if you want thttpd to hide its specific version
+-** when returning into to browsers.  Instead it'll just say "thttpd" with
+-** no version.
+-*/
+-#define SHOW_SERVER_VERSION
+-
+ /* CONFIGURE: Define this if you want to always chroot(), without having
+ ** to give the -r command line flag.  Some people like this as a security
+ ** measure, to prevent inadvertant exposure by accidentally running without -r.
+diff -Nrup old/libhttpd.c new/libhttpd.c
+--- old/libhttpd.c	2018-05-23 21:23:06.000000000 +0200
++++ new/libhttpd.c	2018-11-02 14:47:22.317665209 +0100
+@@ -29,11 +29,7 @@
+ #include "config.h"
+ #include "version.h"
+ 
+-#ifdef SHOW_SERVER_VERSION
+-#define EXPOSED_SERVER_SOFTWARE SERVER_SOFTWARE
+-#else /* SHOW_SERVER_VERSION */
+-#define EXPOSED_SERVER_SOFTWARE "thttpd"
+-#endif /* SHOW_SERVER_VERSION */
++#define EXPOSED_SERVER_SOFTWARE "xxx"
+ 
+ #include <sys/types.h>
+ #include <sys/param.h>
+@@ -754,7 +750,7 @@ send_response( httpd_conn* hc, int statu
+     <title>%d %s</title>\n\
+   </head>\n\
+ \n\
+-  <body bgcolor=\"#cc9999\" text=\"#000000\" link=\"#2020ff\" vlink=\"#4040cc\">\n\
++  <body>\n\
+ \n\
+     <h2>%d %s</h2>\n",
+ 	status, title, status, title );
+@@ -780,14 +776,10 @@ send_response_tail( httpd_conn* hc )
+     char buf[1000];
+ 
+     (void) my_snprintf( buf, sizeof(buf), "\
+-    <hr>\n\
+-\n\
+-    <address><a href=\"%s\">%s</a></address>\n\
+ \n\
+   </body>\n\
+ \n\
+-</html>\n",
+-	SERVER_ADDRESS, EXPOSED_SERVER_SOFTWARE );
++</html>\n" );
+     add_response( hc, buf );
+     }
+ 
+@@ -2807,7 +2799,7 @@ ls( httpd_conn* hc )
+     <title>Index of %.80s</title>\n\
+   </head>\n\
+ \n\
+-  <body bgcolor=\"#99cc99\" text=\"#000000\" link=\"#2020ff\" vlink=\"#4040cc\">\n\
++  <body>\n\
+ \n\
+     <h2>Index of %.80s</h2>\n\
+ \n\

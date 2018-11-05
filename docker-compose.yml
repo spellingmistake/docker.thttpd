@@ -1,0 +1,20 @@
+version: '2.3'
+
+services:
+  thttpd:
+    image: base.docker:5000/thttpd:2.29
+    networks:
+      - thttpd
+    ports:
+      - "80:80"
+    volumes:
+      - /var/www:/var/www
+    privileged: false
+    restart:    always
+    tty:        true
+
+networks:
+  thttpd:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: "thttpd"
